@@ -1,0 +1,19 @@
+{% block stylesheet %}
+    <link href="{{ asset('css/blog.css') }}" rel="stylesheet" />
+{% endblock %}
+
+
+<p>I am _welcome_slug page with a slug: <b>{{ slug }}</b></p>
+
+{# получение данных от одной из глобальных переменных шаблонизатора #}
+<p>Username: {{ app.request }}</p>
+
+<img src="{{ asset('images/logo.png') }}" alt="Symfony!" />
+
+<p class="custom">
+    Some blue coloured text
+</p>
+
+<p>
+    Some not coloured text
+</p>

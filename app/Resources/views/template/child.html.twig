@@ -1,0 +1,33 @@
+{% extends 'my.html.twig' %}
+
+{% block title %}My cool blog posts{% endblock %}
+
+{% block sidebar %}
+    <h3>Table of Contents</h3>
+    <a href="{{ path('_welcome') }}">Welcome page</a>
+    <br/>
+    {% for article in articles %}
+        <a href="{{ path('_welcome_slug', {'slug': article.title}) }}">
+            {{ article.title }}
+        </a>
+        <br/>
+    {% endfor %}
+    {{ dump(articles) }}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {% for entry in blog_entries %}
+        <h2>{{ entry.title }}</h2>
+        {# жесткая ссылка на конкретную страницу #}
+        <a href="{{ url('_welcome') }}">Welcome page</a>
+        <p>{{ entry.body }}</p>
+    {% endfor %}
+    <hr>
+{% endblock %}
+
+{% block my_include %}
+    {% for article in articles %}
+        {{ include('template/article_details.html.twig', { 'detail_article': article }) }}
+    {% endfor %}
+{% endblock %}
