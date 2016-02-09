@@ -6,6 +6,8 @@
     <h3>Table of Contents</h3>
     <a href="{{ path('_welcome') }}">Welcome page</a>
     <br/>
+    <a href="{{ path('_hidden') }}">Hidden controller page</a>
+    <br/>
     {% for article in articles %}
         <a href="{{ path('_welcome_slug', {'slug': article.title}) }}">
             {{ article.title }}

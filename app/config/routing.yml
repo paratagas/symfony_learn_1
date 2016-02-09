@@ -1,3 +1,10 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+acme_privacy:
+# Определение статической страницы напрямую без контроллера
+    path: /privacy
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    static/static.html.twig
