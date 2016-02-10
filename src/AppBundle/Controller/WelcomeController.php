@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 
 class WelcomeController extends Controller
@@ -71,5 +72,28 @@ class WelcomeController extends Controller
         // ... further modify the response or return it directly
 
         return $response;
+    }
+
+    /**
+     * @Route("/optional/{page}", defaults={"page" = "default"}, name="_optional", requirements={"page": "\d+"})
+     *
+     * Доступ к этому контроллеру возможен только через метод GET
+     * В ином случае вылетит ошибка
+     * Можно перечислить несколько методов через запятую: {"GET","HEAD"}
+     * @Method({"GET"})
+     *
+     * При попытке перейти на /optional/2 $page примет значение 2
+     * При попытке перейти на /optional/myvalue выскочит ошибка, т.к.
+     * переданным значением $page может быть только целое число (см. "requirements" и "\d+"),
+     * что, впрочем, не касается "defaults":
+     * при переходе на /optional $page примет значение "default"
+     */
+    public function indexAction($page)
+    {
+        return new Response(
+            "<html><body>
+            <p>I'm optional page with page value: <b>$page</b></p>
+            </body></html>"
+        );
     }
 }

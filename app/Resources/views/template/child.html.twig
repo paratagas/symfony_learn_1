@@ -8,6 +8,8 @@
     <br/>
     <a href="{{ path('_hidden') }}">Hidden controller page</a>
     <br/>
+    <a href="{{ path('_optional') }}">Optional page</a>
+    <br/>
     {% for article in articles %}
         <a href="{{ path('_welcome_slug', {'slug': article.title}) }}">
             {{ article.title }}
