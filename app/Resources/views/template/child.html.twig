@@ -10,6 +10,26 @@
     <br/>
     <a href="{{ path('_optional') }}">Optional page</a>
     <br/>
+    <a href="{{ path('doctrine_create') }}">Doctrine create page</a>
+    <br/>
+    <a href="{{ path('doctrine_show', {'id': 3}) }}">Doctrine show page</a>
+    <br/>
+    <a href="{{ path('doctrine_update', {'id': 3}) }}">Doctrine update page</a>
+    <br/>
+    <a href="{{ path('doctrine_delete', {'name': 'Name 4'}) }}">Doctrine delete page</a>
+    <br/>
+    <a href="{{ path('doctrine_dql') }}">Doctrine DQL page</a>
+    <br/>
+    <a href="{{ path('doctrine_query_builder', {'price': 19.99}) }}">Doctrine DQB page</a>
+    <br/>
+    <a href="{{ path('doctrine_repository') }}">Doctrine repository page</a>
+    <br/>
+    <a href="{{ path('doctrine_related') }}">Doctrine related page</a>
+    <br/>
+    <a href="{{ path('doctrine_get_category_name') }}">Doctrine get_category_name page</a>
+    <br/>
+    <a href="{{ path('doctrine_joined') }}">Doctrine joined page</a>
+    <br/>
     {% for article in articles %}
         <a href="{{ path('_welcome_slug', {'slug': article.title}) }}">
             {{ article.title }}

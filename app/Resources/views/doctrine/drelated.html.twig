@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block doctrine_drelated %}
+    {% for item in products %}
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.price }}</p>
+        <p>{{ item.description }}</p>
+        <hr/>
+    {% endfor %}
+    <a href="{{ path('template_child') }}"><b>Back to template/child</b></a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block doctrine %}
+    {% for item in products %}
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.price }}</p>
+        <p>{{ item.description }}</p>
+        <hr/>
+    {% endfor %}
+    <p>Also fetched product with id <b>{{ product.id }}</b> and name <b>{{ product.name }}</b></p>
+    <a href="{{ path('template_child') }}"><b>Back to template/child</b></a>
+{% endblock %}

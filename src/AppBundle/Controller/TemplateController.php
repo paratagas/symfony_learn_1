@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TemplateController extends Controller
 {
     /**
-     * @Route("/template/child")
+     * @Route("/template/child", name="template_child")
      */
     public function templateAction()
     {
