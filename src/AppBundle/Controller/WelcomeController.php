@@ -17,7 +17,22 @@ class WelcomeController extends Controller
     public function welcomeAction()
     {
         return new Response(
-            "<html><body>I'm Welcome page</body></html>"
+            "<html><body>I'm Welcome <a href='http://symfony.com/doc'>page</a></body></html>"
+        );
+    }
+
+    /**
+     * Метод создан только для проверки функциональных тестов
+     *
+     * @Route("/welcome_form", name="_welcome_form")
+     */
+    public function welcomeFormAction()
+    {
+        return new Response(
+            "<html><body><form action='test.php' method='post' name='my_form'>
+                <input type='text' name='name'>
+                <input type='button' name='submit' value='Отправить'>
+            </form></body></html>"
         );
     }
 

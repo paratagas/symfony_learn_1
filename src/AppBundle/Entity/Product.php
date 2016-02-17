@@ -5,28 +5,28 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* Создание сущностей и репозиториев (этапы):
-* создание сущности (следовать подсказкам в консоли):
-* - php app/console doctrine:generate:entity
-*
-* создание геттеров и сеттеров в сущности
-* (должно выполняться каждый раз после изменения свойств класса сущности):
-* для всего бандла:
-* - php app/console doctrine:generate:entities AppBundle
-* для конкретной сущности:
-* - php app/console doctrine:generate:entities AppBundle/Entity/Product
-*
-* обновление данных в БД (так):
-* - php app/console doctrine:schema:update --force
-*
-* или использовать миграции (когда изучу)
-*
-* @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
-* @ORM\Table(name="product")
-*
-* индикатор встроенного триггера, см. setCreatedAtValue()
-* @ORM\HasLifecycleCallbacks()
-*/
+ * Создание сущностей и репозиториев (этапы):
+ * создание сущности (следовать подсказкам в консоли):
+ * - php app/console doctrine:generate:entity
+ *
+ * создание геттеров и сеттеров в сущности
+ * (должно выполняться каждый раз после изменения свойств класса сущности):
+ * для всего бандла:
+ * - php app/console doctrine:generate:entities AppBundle
+ * для конкретной сущности:
+ * - php app/console doctrine:generate:entities AppBundle/Entity/Product
+ *
+ * обновление данных в БД (так):
+ * - php app/console doctrine:schema:update --force
+ *
+ * или использовать миграции (когда изучу)
+ *
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductRepository")
+ * @ORM\Table(name="product")
+ *
+ * индикатор встроенного триггера, см. setCreatedAtValue()
+ * @ORM\HasLifecycleCallbacks()
+ */
 class Product
 {
     /**
