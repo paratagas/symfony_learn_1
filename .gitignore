@@ -7,7 +7,6 @@
 !app/logs/.gitkeep
 /app/phpunit.xml
 /build/
-/.idea/
 /vendor/
 /bin/
 /composer.phar
