@@ -36,6 +36,8 @@
     <br/>
     <a href="{{ path('_form_base') }}">Form base page</a>
     <br/>
+    <a href="{{ path('_form_external') }}">Form external page</a>
+    <br/>
     <br/>
     {% for article in articles %}
         <a href="{{ path('_welcome_slug', {'slug': article.title}) }}">

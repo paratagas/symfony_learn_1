@@ -17,6 +17,12 @@ class Task
      */
     protected $dueDate;
 
+    /**
+     * @Assert\Type(type="AppBundle\Entity\TaskCategory")
+     * @Assert\Valid()
+     */
+    protected $category;
+
     public function getTask()
     {
         return $this->task;
@@ -35,5 +41,15 @@ class Task
     public function setDueDate(\DateTime $dueDate = null)
     {
         $this->dueDate = $dueDate;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category = null)
+    {
+        $this->category = $category;
     }
 }

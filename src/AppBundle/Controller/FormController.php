@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Task;
+use AppBundle\Form\Type\TaskType;
 
 // типы ниже должны поключаться только для PHP 5.5 и выше
 //use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -73,6 +74,7 @@ class FormController extends Controller
             'form' => $form->createView(),
         ));
     }
+
     /**
      * @Route("/form_task_success", name="_form_task_success")
      */
@@ -81,5 +83,23 @@ class FormController extends Controller
         return new Response(
             "<html><body><p>Form successfully submitted</p></body></html>"
         );
+    }
+
+    /**
+     * @Route("/form_external", name="_form_external")
+     */
+    public function externalAction(Request $request)
+    {
+        $task = new Task();
+
+        // создание формы из отдельного класса
+        $form = $this->createForm('AppBundle\Form\Type\TaskType', $task);
+        // PHP 5.5 и выше
+        //$form = $this->createForm(TaskType::class, $task);
+
+        return $this->render('form/form.html.twig', array(
+            'form' => $form->createView(),
+        ));
+
     }
 }

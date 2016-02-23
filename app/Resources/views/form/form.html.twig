@@ -1,3 +1,6 @@
+{# подключение шаблона для темизации формы #}
+{% form_theme form 'form/fields.html.twig' %}
+
 {{ form_start(form) }}
     {{ form_errors(form) }}
 
@@ -11,6 +14,12 @@
         {{ form_label(form.dueDate) }}
         {{ form_errors(form.dueDate) }}
         {{ form_widget(form.dueDate) }}
+    </div>
+
+    <h3>Category</h3>
+    <div class="category">
+        {# при вызове метода form_row() подключается шаблон для темизации fields.html.twig #}
+        {{ form_row(form.category.name) }}
     </div>
 
     <div>
