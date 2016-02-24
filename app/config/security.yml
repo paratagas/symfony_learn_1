@@ -1,11 +1,28 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
+# проверить известные уязвимости в проекте можно командой:
+# php app/console security:check
 security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    user:
+                        password: user
+                        roles: 'ROLE_USER'
+                    admin:
+                        password: admin
+                        roles: 'ROLE_ADMIN'
+
+    # иерархия ролей с наследованием:
+    # In the above configuration, users with ROLE_ADMIN role will also have the ROLE_USER role.
+    # The ROLE_SUPER_ADMIN role has ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH and ROLE_USER
+    # (inherited from ROLE_ADMIN)
+    role_hierarchy:
+            ROLE_ADMIN:       ROLE_USER
+            # ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -17,8 +34,20 @@ security:
             anonymous: ~
             # activate different ways to authenticate
 
-            # http_basic: ~
+            http_basic: ~
             # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    access_control:
+            # require ROLE_ADMIN for /admin*
+            - { path: ^/admin, roles: ROLE_ADMIN }
+            # - { path: ^/template/*, roles: ROLE_ADMIN }
+            # права доступа можно определять и в контроллере
+            # - { path: ^/role_user, roles: ROLE_USER }
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+            # algorithm: bcrypt
+            # cost: 12

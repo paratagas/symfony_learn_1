@@ -19,10 +19,15 @@
     <h3>Category</h3>
     <div class="category">
         {# при вызове метода form_row() подключается шаблон для темизации fields.html.twig #}
-        {{ form_row(form.category.name) }}
+        {# {{ form_row(form.category.name) }} #}
     </div>
 
     <div>
         {{ form_widget(form.save) }}
     </div>
 {{ form_end(form) }}
+
+{# можно назначать доступ к фрагментам шаблона в зависимости от роли юзера #}
+{% if is_granted('ROLE_ADMIN') %}
+    <h3>Если ты это видишь, значит ты зашел как Admin</h3>
+{% endif %}
