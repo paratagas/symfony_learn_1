@@ -40,4 +40,16 @@ class DefaultController extends Controller
         // но лучше сделать это в аннотации, подключив Security
         return new Response('<html><body>Role User page!</body></html>');
     }
+
+    /**
+     * @Route("/esi", name="_esi")
+     */
+    public function esiAction()
+    {
+        $response = $this->render('static/esi.html.twig');
+        // set the shared max age - which also marks the response as public
+        $response->setSharedMaxAge(120);
+
+        return $response;
+    }
 }
