@@ -72,6 +72,7 @@ class FormController extends Controller
 
         return $this->render('form/form.html.twig', array(
             'form' => $form->createView(),
+            'message_learn' => 'Symfony2 is not easy to learn',
         ));
     }
 

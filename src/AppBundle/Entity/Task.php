@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Task
 {
     /**
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Fill this field")
      */
     public $task;
 

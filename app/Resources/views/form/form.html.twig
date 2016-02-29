@@ -21,7 +21,10 @@
         {# при вызове метода form_row() подключается шаблон для темизации fields.html.twig #}
         {# {{ form_row(form.category.name) }} #}
     </div>
-
+    {# строки ниже переводится на русскую локаль #}
+    {% set message = 'Symfony2 is great' %}
+    {{ message|trans }}
+    {{ message_learn|trans }}
     <div>
         {{ form_widget(form.save) }}
     </div>
