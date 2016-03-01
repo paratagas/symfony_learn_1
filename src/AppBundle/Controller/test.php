@@ -13,6 +13,7 @@ function anotherFunc($param_1)
     return $param_1;
 }
 
+/*
 // php 7
 // Integers
 echo 1 <=> 1; // 0
@@ -37,3 +38,15 @@ echo "a" <=> "b"; // -1
 echo PHP_EOL;
 echo "b" <=> "a"; // 1
 echo PHP_EOL;
+*/
+
+$newArr = [
+    'key 1' => 'value1',
+    'key 2' => 'value2',
+    'key 3' => 'value3',
+    'key 4' => 'value4',
+    'key 5' => 'value5',
+];
+
+$jsonArr = json_encode($newArr);
+echo $jsonArr;
