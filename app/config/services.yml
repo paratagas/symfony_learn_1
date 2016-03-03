@@ -7,3 +7,9 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    # keep your service names short
+    # мое имя сервиса (app.slugger), в принципе, может быть произвольным
+    # но именно оно будет использоваться в контроллерах
+    app.slugger:
+        class: AppBundle\Util\Slugger

@@ -16,8 +16,19 @@ class WelcomeController extends Controller
     */
     public function welcomeAction()
     {
+        $origString = "Some string";
+
+        // использование моего собственного сервиса - преобразователя строки
+        // класс сервиса объявлен в AppBundle\Util\Slugger.php
+        // как сервис этот класс определен в app\config\services.yml
+        $uglfiedString = $this->get('app.slugger')->slugify($origString);
+
         return new Response(
-            "<html><body>I'm Welcome <a href='http://symfony.com/doc'>page</a></body></html>"
+            "<html><body>
+                I'm Welcome <a href='http://symfony.com/doc'>page</a>
+                <p>The Original string is $origString</p>
+                <p>The Uglified string is $uglfiedString</p>
+            </body></html>"
         );
     }
 

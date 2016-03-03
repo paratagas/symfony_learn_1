@@ -39,7 +39,7 @@ echo PHP_EOL;
 echo "b" <=> "a"; // 1
 echo PHP_EOL;
 */
-
+/*
 $newArr = [
     'key 1' => 'value1',
     'key 2' => 'value2',
@@ -50,3 +50,4 @@ $newArr = [
 
 $jsonArr = json_encode($newArr);
 echo $jsonArr;
+*/

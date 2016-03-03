@@ -4,10 +4,12 @@ namespace AppBundle\Util;
 
 // классы из Util можно использовать как инструкцией use,
 // так и в качестве сервисов
-class Calculator
+class Slugger
 {
-    public function add($a, $b)
+    public function slugify($string)
     {
-        return $a + $b;
+        return preg_replace(
+            '/[^a-z0-9]/', '-', strtolower(trim(strip_tags($string)))
+        );
     }
 }
