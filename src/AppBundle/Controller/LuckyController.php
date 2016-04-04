@@ -150,6 +150,116 @@ class LuckyController extends Controller
     }
 
     /**
+     * Используется в http://localhost/webix_api/courses.html
+     * Webix подтягивает эти данные и выводит на страницу
+     *
+     * @Route("lucky/return/webix/dollar")
+     */
+    public function luckyReturnWebixDollar()
+    {
+        // полное содержимое пропарсенных файлов
+        $files = [];
+
+        // массив курсов
+        $courses = [];
+
+        // массив с выходными данными в формате:
+        // year, color, course
+        $dataCourses = [];
+
+        $yearQuarter = 1;
+        // с этого года начнется построение графика
+        $pagesYear = 2002;
+        // месяц-день
+        $date = "02-01";
+        $patternUrl = "http://finance.tut.by/arhiv/?currency=USD&from=";
+        $newPages = [];
+        // установим значение счетчика от 0 до 29
+        // то есть на 29 полугодий (14,5 лет)
+        for ($i = 0; $i < 29; $i++) {
+            // создание строки вида 2002-1
+            $wholeYear = strval($pagesYear) . "-" . strval($yearQuarter);
+            // полный URL, имеет вид:
+            // http://finance.tut.by/arhiv/?currency=USD&from=2002-02-01&to=2002-02-01
+            $wholeUrl = $patternUrl . strval($pagesYear) . "-" . $date . "&to=" . strval($pagesYear) . "-" . $date;
+            // структуру данных см. в массиве $pages
+            $newPages[$wholeYear] = $wholeUrl;
+
+            if ($yearQuarter == 1) {
+                // переключение на 2-ое полугодие
+                $yearQuarter = 2;
+                // переключение на дату: 01 августа
+                $date = "08-01";
+            } else {
+                // обратное переключение на 1-ое полугодие
+                $yearQuarter = 1;
+                // обратное переключение на дату: 01 февраля
+                $date = "02-01";
+                // увеличение значения года на 1 после прохождения 2-го полугодия
+                $pagesYear++;
+            }
+        }
+
+        // образец массива данных, созданных вручную до использования цикла for выше
+        /*$pages = [
+            "2002-1" => "http://finance.tut.by/arhiv/?currency=USD&from=2002-02-01&to=2002-02-01",
+            "2002-2" => "http://finance.tut.by/arhiv/?currency=USD&from=2002-08-01&to=2002-08-01",
+            "2003-1" => "http://finance.tut.by/arhiv/?currency=USD&from=2003-02-01&to=2003-02-01",
+            "2003-2" => "http://finance.tut.by/arhiv/?currency=USD&from=2003-08-01&to=2003-08-01"
+        ];*/
+
+        // цвета для полосок гистограммы
+        $colors = [
+            "#ee4339", "#ee9336", "#eed236", "#d3ee36", "#a7ee70",
+            "#58dccd", "#36abee", "#476cee", "#a244ea", "#e33fc7",
+            "#ee4339", "#ee9336", "#eed236", "#d3ee36", "#a7ee70",
+            "#ee4339", "#ee9336", "#eed236", "#d3ee36", "#a7ee70",
+            "#58dccd", "#36abee", "#476cee", "#a244ea", "#e33fc7",
+            "#ee4339", "#ee9336", "#eed236", "#d3ee36"
+        ];
+
+        $count = 0;
+        foreach ($newPages as $year => $page) {
+            $files[$year] = file_get_contents($page);
+            $dataCourses[$count]["year"] = strval($year);
+            $dataCourses[$count]["number"] = $count + 1;
+            $dataCourses[$count]["url"] = $page;
+            $count++;
+        }
+
+        foreach ($files as $year => $pageContent) {
+            // часть строки, находящаяся перед курсом
+            $patternString = "</td><td><b>";
+            // находим нужную строку
+            $courseString = strstr($pageContent, $patternString);
+            // обрезаем слева
+            $courseString = ltrim($courseString, "</td><td><b>");
+            // возвращаем нужное количество символов с начала строки
+            $courseString = substr($courseString, 0, 6);
+            // удаляем следующий символ открытия тега для четырехначных курсов
+            $course = rtrim($courseString, "<");
+            // заменяем пробел в середине числа на пустую строку
+            // то есть попросту удаляем его для корректного перевода в число
+            $course = str_replace(" ", "", $course);
+            $courses[] = $course;
+        }
+
+        $count = 0;
+        foreach ($colors as $color) {
+            $dataCourses[$count]["color"] = $color;
+            $count++;
+        }
+
+        $count = 0;
+        foreach ($courses as $course) {
+            $dataCourses[$count]["course"] = intval($course);
+            $count++;
+        }
+
+        return new JsonResponse($dataCourses);
+    }
+
+    /**
      * @Route("lucky/modify/{value}")
      */
     public function luckyModifyValueAction($value)
